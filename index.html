@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ETHICA Finserv | SIP + SWP Freedom Plan कॅल्क्युलेटर</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
     :root {
         --primary: #1e3a8a;
@@ -311,6 +312,37 @@
     }
 
     #resultBox { display: none; }
+
+    /* ===== Hidden print template for hybrid (image-based) PDF generation ===== */
+    #pdfTemplate {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        width: 794px;
+        background: #fff;
+        font-family: 'Noto Sans Devanagari', 'Segoe UI', Arial, sans-serif;
+        color: #1e293b;
+        padding: 28px;
+    }
+    #pdfTemplate * { box-sizing: border-box; }
+    .pdf-title { text-align: center; margin-bottom: 14px; }
+    .pdf-title h1 { font-size: 26px; color: var(--primary); margin-bottom: 4px; }
+    .pdf-title p { font-size: 13px; color: #64748b; }
+    .pdf-hr { border: none; border-top: 1px solid #e2e8f0; margin: 12px 0 18px; }
+    .pdf-meta { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 14px; }
+    .pdf-meta b { color: var(--primary); }
+    .pdf-section-title { font-size: 17px; font-weight: 800; color: var(--primary); margin: 18px 0 10px; }
+    .pdf-report-title { text-align: center; font-size: 19px; font-weight: 800; color: #1e293b; margin: 6px 0 8px; }
+    .pdf-report-sub { text-align: center; font-size: 13.5px; color: #334155; margin-bottom: 4px; }
+    .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .pdf-table th { background: #ea580c; color: #fff; font-size: 12px; padding: 10px 6px; text-align: center; }
+    .pdf-table td { padding: 9px 6px; text-align: center; font-size: 12.5px; border-bottom: 1px solid #f1f5f9; }
+    .pdf-table tr:nth-child(even) td { background: #fdf2ec; }
+    .pdf-table td.market-val { color: #ea580c; font-weight: 700; }
+    .pdf-table td.multiple { color: #15803d; font-weight: 700; }
+    .pdf-table td.nominee-val { color: #0891b2; font-weight: 700; }
+    .pdf-table td.custom-val, .pdf-table td.custom-multiple { color: #7c3aed; font-weight: 700; }
+    .pdf-note { font-size: 12px; color: #64748b; line-height: 1.7; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -502,6 +534,118 @@
     </footer>
 </div>
 
+<!-- ===== Hidden print template — hybrid PDF (real Marathi text rendered via html2canvas) ===== -->
+<div id="pdfTemplate">
+    <div class="pdf-title">
+        <h1>ETHICA Finserv</h1>
+        <p>SIP + SWP Freedom Plan — वैयक्तिक अहवाल (Personalized Report)</p>
+    </div>
+    <hr class="pdf-hr">
+    <div class="pdf-meta">
+        <b id="pdfMetaName"></b>
+        <span id="pdfMetaDate"></span>
+    </div>
+
+    <div class="advisor-card" style="margin-bottom:20px;">
+        <div class="advisor-row">
+            <div class="advisor-top">
+                <img id="pdfLogoImg1" alt="ETHICA">
+                <div>
+                    <div class="advisor-name">Valmik Dagu Ugale | ARN-142382</div>
+                    <div class="advisor-role">AMFI-registered mutual fund distributor & SIF distributor</div>
+                    <div class="advisor-tag">तुमच्या आर्थिक भविष्याचा विश्वासू जोडीदार</div>
+                </div>
+            </div>
+            <div class="advisor-contact">
+                संपर्क: 8087126804<br>
+                ईमेल: valmikugale@gmail.com<br>
+                नाशिक, महाराष्ट्र - 422003
+            </div>
+        </div>
+        <div class="advisor-badges">9+ वर्षांचा अनुभव | AMFI-registered | SEBI Regulated</div>
+    </div>
+
+    <a class="hook-bar" href="https://wa.me/918087126804" target="_blank" style="display:block; text-decoration:none; margin-bottom:20px;">
+        😊 संपत्ती निर्मिती | 🎓 मुलांचं शिक्षण-लग्न खर्च | 🌴 निवृत्तीनंतर उत्पन्न - मोफत मार्गदर्शनासाठी कॉल / WhatsApp करा 📞 8087126804
+    </a>
+
+    <div class="explainer-wrap" style="margin-bottom:20px;">
+        <div class="explainer-heading">💡 SIP + SWP कसे काम करते? (सोपं स्पष्टीकरण)</div>
+        <div class="explainer-card">
+            <div class="explainer-icon">🌱</div>
+            <div>
+                <div class="explainer-step">STEP 1</div>
+                <div class="explainer-title">SIP सुरु करा</div>
+                <div class="explainer-text">दर महिन्याला ठराविक रक्कम इक्विटी म्युच्युअल फंडमध्ये गुंतवायला सुरुवात करा — अगदी लहान रकमेपासून सुरुवात करता येते.</div>
+            </div>
+        </div>
+        <div class="explainer-arrow">⬇</div>
+        <div class="explainer-card">
+            <div class="explainer-icon">📈</div>
+            <div>
+                <div class="explainer-step">STEP 2</div>
+                <div class="explainer-title">Corpus वाढतो</div>
+                <div class="explainer-text">वर्षानुवर्षे Compounding मुळे गुंतवलेली रक्कम अनेक पटींनी वाढते — जितका जास्त काळ थांबाल, तितका जास्त फायदा.</div>
+            </div>
+        </div>
+        <div class="explainer-arrow">⬇</div>
+        <div class="explainer-card">
+            <div class="explainer-icon">🔄</div>
+            <div>
+                <div class="explainer-step">STEP 3</div>
+                <div class="explainer-title">Switch होतो</div>
+                <div class="explainer-text">ठरलेल्या कालावधीनंतर जमा झालेला निधी योग्य वेळी सुरक्षित/कमी-जोखमीच्या स्कीममध्ये वळवला जातो.</div>
+            </div>
+        </div>
+        <div class="explainer-arrow">⬇</div>
+        <div class="explainer-card">
+            <div class="explainer-icon">💰</div>
+            <div>
+                <div class="explainer-step">STEP 4</div>
+                <div class="explainer-title">मासिक उत्पन्न (SWP)</div>
+                <div class="explainer-text">SWP द्वारे दर महिन्याला ठराविक रक्कम तुमच्या खात्यात जमा होते — मुद्दल कायम राखत नियमित उत्पन्न मिळण्याचा प्रयत्न असतो.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pdf-report-title" id="pdfReportTitle"></div>
+    <div class="pdf-report-sub" id="pdfReportLine1"></div>
+    <div class="pdf-report-sub" id="pdfReportLine2" style="margin-bottom:12px;"></div>
+
+    <table class="pdf-table">
+        <thead id="pdfTableHead"></thead>
+        <tbody id="pdfTableBody"></tbody>
+    </table>
+    <div class="pdf-note" id="pdfNote1"></div>
+    <div class="pdf-note" id="pdfNote2" style="margin-bottom:16px;"></div>
+
+    <div class="delay-box" id="pdfDelayBox" style="margin-bottom:20px;"></div>
+
+    <div class="cta-box" style="margin-bottom:20px;">
+        वरील आकडे फक्त अंदाज आहेत. तुमच्यासाठी नेमकी कोणती योजना, किती रक्कम आणि कोणता SWP पर्याय योग्य आहे हे ठरवण्यासाठी वैयक्तिक सल्ला आवश्यक आहे.<br>
+        सविस्तर समजून घेण्यासाठी व तुमच्या सर्व शंकांचे निरसन करण्यासाठी आजच मोफत:
+        <div class="cta-links">
+            <a href="https://wa.me/918087126804" target="_blank">📲 WhatsApp मेसेज करा</a> | <a href="tel:8087126804">📞 कॉल करा: 8087126804</a>
+        </div>
+    </div>
+
+    <div class="disclaimer-box">
+        <b>Disclaimer:</b>
+        <ol>
+            <li>SWP = Systematic Withdrawal Plan. वरील मासिक उत्पन्नाचे आकडे केवळ उदाहरणादाखल (illustrative) आहेत.</li>
+            <li>Past performance may or may not be sustained in future and is not a guarantee of any future returns.</li>
+            <li>Mutual Funds do not have a fixed rate of return and it is not possible to predict the rate of return.</li>
+            <li>Mutual Fund Investments are subject to market risks, read all scheme related documents carefully.</li>
+            <li>This report is generated based on the assumptions entered by the client.</li>
+        </ol>
+        <div class="adv-footer">
+            Valmik Dagu Ugale | ARN-142382 | EUIN-E243525 | AMFI-registered mutual fund distributor &amp; SIF distributor<br>
+            📞 8087126804 &nbsp;|&nbsp; ✉️ valmikugale@gmail.com &nbsp;|&nbsp; नाशिक, महाराष्ट्र
+        </div>
+    </div>
+</div>
+
+
 <script>
 const LOGO_DATA_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCAEEAQQDASIAAhEBAxEB/8QAHQABAAEFAQEBAAAAAAAAAAAAAAgBBQYHCQQCA//EAF8QAAEDBAECAwQEBwgHFAsBAAECAwQABQYRBxIhCDFBEyJRYRQVcYEWMkJSYpHRFyNygpOVs9IJJFOSoaKyGDY3Q0RFVFVWY2RldIOUsbTB0+MlJicoNUdXZnV2hJb/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIEAwUG/8QAMhEAAgEDAgIHCAMBAQEAAAAAAAECAwQREiEFMRMUQVFhcZEiMlKBobHR8CPB4UIGcv/aAAwDAQACEQMRAD8An5SlKAUpSgFKUoBSlKAUpSgFKUoBSlPWgFKU9aAUpSgHpSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAr+ulUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClK1D4gOWxxpg6IlqeQMhugU3D3o/R0D8d8j5bAAPmoj0BqJSUVlnG4rwoU3Vm9kbXjzocxyQ3ElsPqjuexeS0sKLSwAelWvI6IOj8RX71BHgvkuZhmdouM+W6u03V32Vz9ooq2oqOn9nzUkkkn1BV8qnakhSQpJBB7gjyNcqNZVU+9GXh3EI3lNySw1zX2K0pSux6ApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApWtudM2yPjziCRleMsxHZMaUwl1MpouI9ktfSrYBB8ynvutS4T4v4095tnNcbERtR0Z1sWXEp+amle9r7FE/Kqymo8zBX4nb29VUassPn4ElrxMdt2PT57DaXXY8dx5CFdgopQSAf1Vonj3xXYnk6mIeU25eOyXAB9J9p7aL1H4q0FI+0jXxNbxtV3suUY41dLPOj3G2y2yUPMq6krSexHyPmCD3Hka5n5zj8/jfku8YxPQptESQpDaiNBxknbbg+RSQf1j0qtRyWHEwcYvq9r0dWi8xfPufd/Z1AbcQ6yl1paXELAUlSTsKB8iD6iubfiHzZ/KPETki1vEx7dINrjJ32Shn3Tr7V9avvqRPhA5Fm3/AB68YPcHVOpswbkQVqOyGVkgt/YlQ7fAL16Cok+ICyzMT8SWX22U2ptD1wXOjqPk40+fapIPr+MR9qTVsa0Z+J1neWdOpBbN7+ZdsdkJVi8dau+yv/KNT84RyF3JeC7FOkOFb7LSobij3JLSigE/MgJNc6LY/wDRMWtyCSkuRg+d/pFR/wCqp38RlfG/g/ZyC8MqQtiBJvbjK+x6VdTqEn4Ep6P11ht6bjWk/Mx8Bk4XE0+STz6oy/kPlvDeNIqPr2at2e6nrZt0UBb7g/OI3pKd/lKIHw3Vj4a5he5ak5C6LEi1xLathDI9v7VbnWFk9XYAa6R2Hxrn3ecyu2U5JMv16mKkXGe6XnnVH1PoB6JA7AegFTm8KeHSsa4UN4uDCmpV9kfTUpUNKDASEtbHzAKh8lCtUZScvA22XFK95eaY7QWdvtl+ZvSlak5C8QWHYPcHrPESu+Xdo9LsaKsJbZV+a44dgH9EAkeuqw/irxAZNyVzazjAtdsjWxER+TI9ila3E9OgkdZOvxlDfap6aOrSuZ60+J28aqo6sybxsSLpSldTeKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKVD/AJ1zbl3DOQ3bfdsgms2OSVO21626jIda9UKKe5WneiCr4HyNa7tPJ99W8FQMyu7Mn0S5NcCifsKtH/DWKredG8aGeDW49TpVHTcHld5N/kHFGs44uvuKOqCPrGGtltZ8kOa2hX3KCT91cwJYn47eJVsucdyPJjuqYkx1jSmlpOlD7QRUwuLvEpMGURMV5CebealuBiNdwkNltZ7JS8B2KSdDrAGie/buMs5t8NNh5SkOZBZpqLHkykBK5Jb62Jehoe1SO/UB26x312IOhrvCca0coy39CHFaar2/vR2a7TRfhU5KmWTmBvC35Sl2m/BXS0TtLUlKCpC0/DqSkpPx934VJTl/hzBeYkIt10mogZFEZ6o8yKtJkNtknQW2T77ZIPY6770R3qLvHvhs5kwLxCYldLpZmJlniXZp124W6YhxDaATsqSrpWE/xfWsi8YDc/HubcbyuC6/EVItfsUSWVlC0radUSEqHcHTqTV0tKwhSc7OxlG4hqSfJ7bP/TY/h24CyjhvPMmuWRXe23CBJhtMQpEQrSVALUtfWhQ90jSfIkd/OrXzRx5jnic4vby3BXA1l9naUGGH9IU+3skx3fhsglC/IHY8irXn4N8Rcy63mDhGeyxNE/TMO7r0lZWeyWnddj1eQX570Dve6sPGj+Qcc+LpjAJjS2/bvusAEECTGUha0OJ+KfcSr5HY891ylWkpRcVs+Z1p3tF06cKMf45NprtTeMGL8B8J/htcrTfcpQpnGLNbIhlIfBbMiQlHUplW/JKfNf3J9TqUt7uNr5g4bzfGsSd61Khv2xh5Y9m244pnaCn4I2QNkeh9KxPxP31zGeAUsWL2UVi53ZuHIWzpKQFda1g69VKRo/eKxfH81a4F8ODeQ36Etd9yGSXLda3iUKWAgBK3PVKQPfPr7yR5mocpRqqKW3Nl4Sp2ladHHs4cpPzzhFo4x8HtoxZxrJeW7/CuKo+nTbo5LcNBHf8AfXV6LgHw0kH12O1bY8RHIjvHvBTsyxyA1PubiLfCeYI/egtJUpxOvghKtEeRINQryvPc25RyBli+3aRcXZT6WmIaT0MtFagkJQ2Ow8x37n4k1KTxQ8aZnmuBYdYcJsr12dhTCHm0OoaQhIY6QtalkAJ2NfHvXVS1J4OFpdRrUa0LOnpwlv2vP4IYOXVbbQbSohbg6urezo+u/ifj99Sz8GuDSodsvXIE5lTaZoFvglXbrbSrqdWPkVhKd/oKrFuNfBlkL10bunKV6ix4u+tdttrhddd/RU7oJQP4OzryI8639ybybjXCOE22z2q3R1TXW/YWu1Ne422hAA6167htPYfFROviRWMI01kzcO4Y7SfW7raMeX7+7m1qVBS6cy5redz75l8mK0pWw1GdMZofJKUaJ+/Zqzwua8zj3NiLjN+yCVKedDTLQeU4HVk6SkIX1dRJ9NVmV9qeIwbRvl/6Kin7rx9fQ6B0rH8JbytvBbd+G8mK/flN9coxWwhCFHv0DXYlI0CR2JBIGqyCtyeUe/CWqKljGRSlKksKUpQClKUA/VSlKAUpSgFKUoBSlKAUrzzp0O2WyRcbjKaixI7anXn3lBKG0JGyok+QAqLefeLEqmPQ8DEWPDbOhc5ietb36TbfklPwKtk/AVzqVY01lmO8v6NpHNV/LtJF5phOO5/ib2PZLCEiK4epC0npcZWPJxtX5Kh8ftB2CRUMc78I3JNquLi8SVEyOCVEtkPJjyEj0CkLIST80q+4VZ1eKPk+2TzObzBMxG9mNJhtrbV8tBII+4ipTcCc4/uy45KdkY7Lts6DpL77bS1QXif7k6R+N8UHZHxNVjJVN8YPH6Sy4vPS4tSXb+5XqRUheHbnebE+i3rCnFsdPSmSLjGEhn4aBc04PkSD8FCpscat5f8AuN2q35ohyJkUeMYcl4KCytSNoQ8D331JCVfaSDWA825Rzbgrov2GxrXdsdVpLrSbet2TEV8VgL95B/OA7eRHkTrHF/GTdId2bhZ/jEZTG+l2TbApp1r5llwnq+wEGpWmLwWo1LTh9Z05OSb7Wtn80Xazc+51j95fteUNxrm7EdUw+082GXPcV0qIWka329QazfkLGsd8TPBQdxqa2xdYbxdhuSBoxpATpbLoG9JUkgbG/wAlQ3rVYJzNxo9n1sY5X4kcRe4dxaD8iPDP746QNe1aHqe2lI/GBHkTsVafCJe7snlvKMcmsSIba7ciS7DkIU2tt1t0I2UqAI7OEeXw+FZaCrU56ZvKONGrWjX6pce1CWyb+jTIy3nHc0we6SseyKzT7JdoalSYrkhJSl7o95QaX+KvWutJSTvSh56rpo87Z1YhAzu9W2K9MtduVcG5SmklxjbHU70K807SSDrzrAsP5jwrlC6TsMyeyx40lEt2K1HnBLzEsoWpI6Soe6vQ30kfYTVu8RGbTcC4ryG03CH02C92WVbbdcoqO8GYWFBEd1I/IcG+hY8iClQ7g1shKMt4m7h9G3oxlVoyzF/dd5kPCiYec+GvDrxkcGNcXpCTdCJTYcCJBecX1gH8pKlHR9KjX4xZE2d4g7XDkJdVbLdZmVobb2VPOvPO6bQB+Uotjy8koUfSt/8AhNun1j4VcfYUUlyCt+Irp+TpUP8AFWms4zi/YLgLCs3yWPEbndIjsupZSuU8Rshtrff8pXkQACSTqrNpLLOtWELizi5PCaTbI2+G/gO+qyeFyHnNrctsSGRIt8CQgtuuu/kurQe6EJ8wD3J0daHeQczk2NLua4OPobfQhXQZa+6VEefSPUfM+dY6eUZGbeGfI8wtdvXbXQp6Ey0XOtQHUlHUToDel+nYfGsL4yx+/Xt5pcOE8zBSQHJjyClvQ8ynf43yArweKXdaMoULbnLfbn/h7H/nuH2lG26SLzHvfb4/hG/sZk3CZbnpdweLnW5psdIAAA76189/qqI/LXFXNed8t3nL4GFuTm1L+jW1iVOYZaYjN+6hRSpwKUpXdfR2A6+5P4tbL5U8T2K8YXBeGYvCRf7zCAak9T3s48RX5q1gErX8Up8t9yD2rAcP578QPJWYMWjELHYUJePUZC7e6Y0ZvfdbjhX5D5dyewG69WjDRSjTqPL7fM8Tit5Z3FboJZe/KK9PA1dB8M3Pt7vIF1xtEbuEmTNnsJbQPkEKUQPklNSp4X8O1l4wcTfbxLbvOR9JSmQEdLMQEaIaSe+z5FZ767ADvvaNwu0jFcAfvF8TJuz8GMXZItUJSnH1Ad/ZMgqPf0GzoeZ9ahtkfjEyK+3V5uxzo+OwkKKUNNse2fPf8ta0kBXxCQNfOuk2ob4z5GSdtZcOkqs05S7O3/P3YnNSoLY74sc6tM9L1xuUK/wd+9HlMhlwj9FxABB+0EVLHjPlXFeU8bVcsfkKRJY6UzLe+QHoqj5BQHmk6OlDsdfEECadVT7MHo2fFbe7log8S7mZxSlK6npClKUApSlAKVUGlAUpSlAKUpQClKUB8rQh1pTbiErQoaKVDYI+BFarynw48R5XKVLkYym3SVHanbU6qL1H5oT7n+LW0ZMmPDhuy5b7UeOyguOOuqCUISBsqJPYAD1NR2zLxcY3bLi5Aw2yuX3oOlTn3fo7BP6A0VKHz0B8N1SbiveMF/VtKcV1rGPFZ9C8RPCrwjYXjdbpbJtxZYHUU3OapbQ+1CAkK+w7FZk/nmPYzamrdYLTFZhR0dLLDSkR220/BKEjsK0lYfGWp65pi5Px9IMRaulUi0PF9SR821pHV9yq3DAxzjTlbG2skx958RJGwVRepgpUPNKm1p91Q9RoVgvVdTiuqSS8+Zo4LX4ZJPQtvDb8M9eOcwY3frsi0TUqtst09LXtFhbTh9EhY8ifQHW/Soy+IPg7knHrlIvOEtzstxB5ZfXZ5BXNegK81JSCS4W/gptXUkdj2GzI1GD8UcbzG7zcI5emk/vK5SVzHf8Am2UJPf5hO/nXnuvOD7ClN49xFyVfSD7rzdlVFaV8wp8pV/i12so3Cp4uWnLwL8Up2tZ6YZS/fp5kfPC3zThuEm64jkl0uWPQJCxLYh3qOv2cJ/ydAkBIAbVpJ/fEoKSDsq2TUzLe/YrwGr9an7fP6m/Ztz4ykO9SCQekOJ37uwDreuwrRFz595GaZeRI8MWZvRlpLa/aKDnWkjuFJS2rtr071EzO89tWL5O7kfG+OZnxNeyvTlq9qUQHz69Laggtn5AKQfzRWw85XMbeCgt0vBr+sfYyvnvG71xjzTdHi29GtN0kqn26Y3sJJUrrICvRaFkjXnrpPrUv7/YkcweEv6uuzRXIvdgakpV090SS0l1tYHxDgSajHgXimtef2VOD81Y1CyWE/pK3THSHAdfj9HZKiPPaOhQ9N1NXF5+P3HEYD+Lyo8i0oZS1GMdW0pQgBIT37ggADR7j1qkaSg212mLhUbfpqqpS584vZr8rxRFDwJZoiTZMhwuY6USwW7m0ye2hoNO6+whv9dYt4pr9drx4o28bQH3m7dBjtRYrQKitbw6z0pHmpRKR28+kCsKsdxVwZ/ZA5jDxUxbWr65FcB7D6HLIKSfkkOoV/EqZnKWScS8Rzl8o5VbIa8lfZEOGtDYcmSegHSGgo6QB1HqX2AB7nyFWqQ1LA6v09pK3ctOl7+XP98i78QYOvEeErVj17itKmLSqVMYWAtKXVq6yk+h6fdH2pq08tc24TgeJXaEjMbcxkYirEWKwhU11lwjpStTLeyAD30opB1rY3UJs58UWZ8o5Ii23bIJuIYmpZL8SwJ6nlNfmFalJLij5dylA8+k+R29xVzfjWI44LTxR4ecruDT6up+ejqfkTFD8t11LSgo/Leh6AUUNKwjVSvKcIKjT2ilhbNv0X3+ho7BML5DzvLWmeLcTu7C1OkyspvrQClKUSVOrWpJba8yelvrcP5yqnFEuWFeHHi2Fa8lyeddbpJJdW5IeU9LuL5A61IQpR6Gx2AGwlIAGyT3t1p58zJ9SFXjw7cjwmlea48dEgp/inoNXW7SeJOYYLVozbFbhGl9wy3f7TIt0hlX+9vKSADv0Ssg/Okk8bF6dKMIydB+2+WU0vQxaJ4qbZMkFQxkJj70N3FHtP1dOt/LdetzA+Aef35F1XYEtXtGnJL0UmJKGzrqWWz0ub+J6q/WB4SuK7dO9uh+/uNA9X0dyano+zYQFa++rBf8AxD8a8VIdxLjjDJl2MVZQ85DaUxESsdj1PKSVOKHqQD/CrLTjWjLM5ZRng7imnK/lHR5Z9MIv1t8IfDsCYl9+JerghJ37GVPV0H7egJJ/XW4cdxbHMStKbZjVkg2qKP8AS4jIQFH4qI7qPzOzUZLH4x50iZ1XjBo6YhPf6JNV7RI+xadH9YqRGC8i4ryLYzccauAdLeg/FdHQ9HJ8gtHp8iNg+hrvGcW8I7WFxYTli2wpeWH9TKqUpXQ9cUpSgFKUoBSlKAUpSgFKUoBSlKAjP4qonL+RQouOYfitym4yEB6a9AUlxcp3fZtTaT19CdA61pRP6IqHL+FcpvzBb42E5SmQo9Ibatb4Vv5nprq9T7z+uq6VnLPFuuCwuK3TSm8/vIg9wz4Rb3cZzWVc4PPR7ZG/fGbCuWSp3XfqkEK0hsfmA7P5RA2DsrL/ABR4zi+sb4uxyLdURE+yQ/sRoLYT6NpSNqSPj7qfgSO9ePxg8oyLDYoHHNpkFp66tGTcVoOlCMFdKW/sWoK38ka8jUN7dEvWS3qNjthivy5U5xLDUVke88ony+z1O+wA2fKolqeyPMv7+VpJWtrs1zfN+SJ7+HzlfM+Wpd+ul3TaUWWAW4zK4MZxv2kg+8oJUpZKkpT09yBsrGhod/nnXxF2/i+SMbsUVm55K42HFpeJ9hCSfxS5o7UojuEAjt3JAI3lGA4pa+CPDmYklxDv1XDeuVykJ7B97pLjhHy7BI+SU1ztUcr5GzmZcWoU69Xi6SVSHEQ2VPKK1netJB0B2A9AAKl7I18Qva1pbwpxf8kvmzbsTxB8y3nIo7DeWzFzprqGIdqtkWOgLWtQCQSUK6EkkefUr5DzqdbdkauOJRbVlkeFenAwhEr6THS4084EjqPQoa0Tv0qP/h18OEjB7g3nOcobN9CCIVuSoLTC6horWodi6QSABsJBPck9pMfZSKa5mrg9CvCk53Dbb7G2/uRZ5d8GGGZDbpN74tbbxTI0bdbjNrUIUhQ79JT3LJPopHYeqTWleEuYsg4pzx2y5U1IjpZl/Qsgtzvm2oHp9ukDt1p9ddlAH4pI6IVAXxg4tFx3xGwMphN+zF/tgMlIHZTzSvZlX3p9l+qrOWEZeOWihBXlLacHlP8AryZ4PHHjzMXmWyZRBKfZXy0jbyO4W4yrp6gfX3Ft/qrVy3eSfE1zZBtrbiZN1ejtx0FxShHgx2kgKcV5kJ3tStd1KXodyBWxOUbq9l3gb46vctRem2S8SLIt0nZ6PZqKN/xEND7q2p4DMTjMYllWbuNJMqTLRbGnCO6W20BxYB+anE7/AIAqyfs5KU11i4SXuySk/Q2fxP4VeLuMoTMqRamclyAAKdut1aDml/700dpaHw7FXxUasXiUznOuOrlZpdkvsy12Ke0qOlyGw0sMSEd9LCkElKkHY6SCOhXY+VSQrGOQMGsvI2AzsUviFfR5KQW3kAdcdwd0OI3+UD+sbB7GqNZR7N1bOdCVOi9L7MbET8P8WGX2G7MN5oI+Q2lZAcfjtpRJQn89BTpK9fmqAPpsGpTZHktxuXCc/LON5EK4zV25U62F5CnGpBSnrCCkEHagCn0IJ7+Wq56cl8K8i8WXV36ztMidbNn2d2gtqcjuJ9CrWy2r5K18ifOpCeCLPHLjYchwCZK9qqAtNxhtlW+htw9LiR8gsJV9rhqsYuO2TxOFXVxGq7a5zvyzzXzLRh3jTyGQplzJMXtlwhK0HXbYpcd5pR9ChZUCfh3APofPWechcR8ceJrB05jg9zTZskSNJuLSC0tSwN+xmNp7n5K7qHYgqHYxu584kuXEPMMq52llacevLy5EF1KdoR1HqXGV6bSSSB6p0R3B16uDuVZGB8qW+4OyFN2qatEO5ME+6W1K0F6+KCQoH4dQ9ahtxfgcVxOpb3HV7l5jy35rx8jBr9xRzpg10VCveL5A822rpQ/EaXOjuj0KXEBXY/PR+IFZxxLauebNyBAyPFsAvy5DSglz20ZUWO80SOptxTvSnpI+fY6I7iujfn3/AOqn2/4atKCe+D0ZcCpSqKopNNb7c/U/KO467DacfYUw6pAUtpSgooJHdJI7HXlsV+tKVY9wUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgIrcseGnN+WOfrlksi+2q0WFTbEeMtXW/I6ENgHTYAA94rPdXrW3OKuC8H4mjF6zRnJ14cR0PXaZpTyh6pQB2bT8k+fqTWzaUMdOwoU6jrKPtPfLPxlxIs+E7DnRmZMZ5JQ4y8gLQtJ8wpJ7EfI1+UC1221R/o9st8WE1/c4zKWk/qSBXrpQ14WcilKUJFQf8bV2hv8lWC3NrSt63WxbroH5Jdc7A/c3v76ljyPyTjPF+FPZFksxKEgFMeKgj2stzXZtsep+J8gO51XMfKchyzmTmNxUOMqbf8AIZyW2YrRJSjfuoQD6IQkDZPkEkn1rnUefZR4XG6uuCtYe9Jr0M0ukhUXwB2GM72Vdszky2d+rbUf2aiP4w1UkvAzco73Bl7tKCPbxL0txYHn0uMtlJ/xFD7qi14g7vabTkmOcP43LTJtOC2/6A7IQdpfnuHrlL/vtD5EKFX7wxcvxOLuVFNXh32eP3pCY0530jrSdtvEfBJKgr9FRPpXZR9nBlp1Y213CL5JY+n5OlFK/Nh9iVGbkxnm3mXUBbbjagpK0kbBBHYgj1r9KqfTlCAQQRsHzHxq3xLBYrfc3LlBstuizXUdC5LEZCHFp3vpKgASNgHXyq40oRhMtOS4xYcwxuRYcltce5W+QNOMPDY36KBHdKh6KGiPSop5v4LJaZD0vjvJ2S2dlEC8Ago+QeQDv+Mn76mFSoayZLuwoXS/ljnx7S14yxcouFWiNeSk3JqEy3K6FdafahsBej6jqB71dKUqTXFYSQpSlCRSlKAUpSgFKapQClKUApSlAKUpQClKUApWOXvNbVZn1w2Y1xvFwSN/QLRGVJdH8IjSG/tWpIrDLhP56yUFuw2XHMJiKGvpF3dNymAfENNFLST8itdUlUiirljks/vobWrD8m5X41w5K/wmzmxW5xHmy7MQXf5NJKv8Fa1m+Hi+5Z73I3L+X5AlfdcOPJFvi7+TTIHb76uNn8LPDtlKVxsRtzjo/wBOksmSsn4kuqV3+6ubqy/5g36L7tEYqS7l5v8ACf3MevvjS4ctzq49hXe8mkDshNthFKVH+E4U/wCAGsCvPim5qyppTHG3C13hoc91EyXCflr/AIQHQhA+8qFSRhcVYpb0pTCZfjIT5NxSmOn9TaU1fouMWeIgJQw6vQ1++vLX/wBZrlruJPGhJf8A1/j+5E7ZyW9Zryj/AG2c753EXiG5Ryo3XNlIt7jh6HJ+S3BtkNI35IaSSoAfmpQBW2LXxMjh/ApCOKcnxe453dWFRpeWXmb9HFtbI7phspQvSj+cTvts77JEtncRxp5XU9Zoyz+kCf8Avr8V4Ph7ieleN21Q/SZBqrV2vdUfnki34fZ0W5e02+3bJzRZ8L2dPyHFt5rgUl4qKln65c6ionZJKme5J77q5r8LHMUeP7WIxjk9P50a9s6/x+mujDWA4Uyoqaxa1oPntMdIr3DG7CIxYTaoqWj5pCdCkJX697R8skVuGcPqdkvoQS47k+LDh9lMCzYrJvllbJWq2KdauDKfj7P2ThW369k9vlW57X4wGLaltjk3irMcUfPZTyYi3mR8/fShQH3Gt8NYFiLDxeYsrLTh81IWof8AfXtfx2E817JL0xpGunTb5A19h2K6a7j/AKgvk3+CIWcKS00qskvFJ/2YViviB4czFTbdlz+0e3WO0eY4Yru/h0uhOz9m62S24260l1taVoUNpUk7BHyNa0yDgnj/ACXq+uLFa5qlDXXJt7JX/foSlX+GsQj+HB3GJCpHG+c5Biix3SxCnuLjE/pMPe0QR8u1Sq8170GvR/Z5+h00VI9ql6p/VY+pvylapttx5xxcJbyKzWjNoSdAyrUoQJuvUlpZLSz8gpFZ3Y8ptd9T7NpMuFMA2uDcI6oz6P4ih7w/SSSPnXWNWMtl+CU32rH738i90pSuhYUpSgFKUoBSlKAUpSgFKUoBXw660wwt99xDTTaSta1qCUpAGyST5Cvusc5A1+5NlG/L6ol/0C6ESeE2V/D/AATt/wCuuO9/L/0kz/Wp+H2C/wC7THf5yZ/rVyu41xRnPuUcfwxcz6Am6SBHMpLIcLXuFWwkkb/F8tipYjwG27p78mSP5nR/4tDx6F/c105U6Sa8yUH4f4J/u0x3+cmf61XaBdrVdLcZ9sucObEBIMiM8lxvY8x1JJHb1qI58BluP/zMk/zOj/xakBxNxXE4t4nODC7Lu7Cnn3VyFMBgqDvmnpCjrt67obKFW4lLFWnheeTJRm2EgEJy2wAefa4M/wBaq/hvhf8AuusP84M/1qjNK8CeLqmPLhZ7dY8YrJaacgsuqQnfZJVsdWh23obqInJOMxsD5UyDEI8kzW7TKVGTIdaShTukg7KR2HnTcyXF/cW61TprHmdVPw3wzW/wtsX84M/1qusG4QLpDEu2zo0yOokB6O6lxBI7EBSSRUQbV4HrFcLDBnr5AuCFSGG3ikW1ogdSQrX43zqRvEvG8XijjOPh0O6vXJpmQ6+JDrSWlH2i+rXSkkdqg2W9WvOX8kMLzyZB+GGJ/SPYfhRZvalXR0fTmurq3rWurz321V6rketxsc5EezRr8IvLpH+y66378/tqSljeO51ZjjBWrM/l2KRn3GJOTWZl1tRQtDk1pKkqB0QQVdj8qvG+4rktyy63+7pm4KUEfXk0H3R/d10w+wjiF67WMZKOcnWZ19hiKuS8822whJWt1agEpSBsknyA161bIuVYxOmNxIeRWmRIcOkMszG1rWfPsArZrHs+0PDhk2wCPwbk9j6/2squeHhucQfFPhA6U7+nHRCR/cXKC6vXRqwpqOdR1HqmwO5OqsOZZjY8CwW4ZZkcn2Fvgte0WUjalk9koQPVSlEJA+JrnrnHOHKvO+bt45ZEzo8SY77OFj9rWR1j/fVDXtCANqKiEjROgO9C15fRtkljMnyRP268occWN1TV3zvHYbqTpTbtwaCgfmN7FeSJzJxROdS1G5Fxla1fipNwbTv9ZFRbxXwRZHLgNystzOFaHlp6lQ7fF+lKQfgXCpKd/YCPma9178DM8RVKx/kZl97XutXG3ltO/wCGhZ1/emo3MnWr9+0qKx57kxIVwgXOImVbpseYwrydjuJcQfvSSK9BSkkEgHXcbHlUavDN4fMg4wvF1yPM5TaLgomLDhwZRWx7P8p5WtBSleSQobSAT5ntJXYqT0repOpBSqR0vuK1YLvnGG2C/wAayXzKbRbrlK6fYRJUtDbrnUrpTpJOzs9h8TX4Z9nFk4648uWX353piQm+oNpIC33D2Q0j4qUrQH6/IGuV+Z51es9zy45bfn+udNe9oQknpaSOyG0fBKUgAfZvz3QycQ4h1VJRWW/sddqVo3ww8xp5R4vFuu8rryWyJRHm9Z96S3rTcj59QGlfpA/EVvKhto1Y1YKceTFKUodRSlKAUpSgFKUoBWN8hduI8pP/ABPL/oF1klY1yJ/oQZUf+J5n9AuhWXus5Pcd5s7gHJVhzNqEicu1vCQIzjhbS57hToqAOvxvPRqTw/sgF31/oa23X/5Zf/hVH7w2+zf8VGBMutpcQq4JBSoAg/vS/Q11aFotehu1w/8Ao6f2VeWEeLY0Krg9E9O/dkhbD8fs1VwYTN43hiOpxIdLN1UVhO+5SC3onXkDU3ELS40lxO+lQChv5ivL9UWv/auH/wBHT+yvZr5aqrPVoU6kM9JPV8sFFH3TXKPxFu68UWfD4XNz/ITXVw/imuTHiQXrxT8gD/jRz/ITUx5mPikdVNLxOqeL98Isx/4Cx/Rpq6+o+0VaMW/zj2b/AJAx/RJq777j7RVT0Y8kceLxdBbeWp9xLftfot6df6N66uiSVa36b1qpaf5v9IJ/9lS/54/8molLWP3elJOiDkmiD/yyuwH0CFs/2nG8z/pSf2Vd4XM8Wxo1Hr6OenfuyQ0H9kARv/QqX/PH/k1EPL8jVk+d33I1Rfohuc5+b9H6+v2XtFlfT1aG9b1vQ3XYcQIOx/acb+ST+yuQfLygnn3OUgAAX6cAANAD266mOHyK8Ro1dMeknq+WDqZyCdeGvKD/APbUr/sqq5y+Gh0q8V2Cjf8Aq4/0DldGOQj/AO7RlP8A+syv+yqrm54ZF78WmBj/AIef6ByqrkzvexzXpMkz49cilxcXwzGWnlIjTJEia+gH8ctJQhG/s9qo/qr8/AdiltXj+T506yhy4GUm1MOKGy02EJcXr4dRWnf8AVkvjfwC4ZNwzbsvtbBedxp9bspKRsiK6kBxY/gqS2o/AdR9K0h4N+b7Hx7lFywvLpqINovbiHo8946ajSUjo04fyUrT0jqPYFI32OxP/JE4qN6pz5dh0TqlfLbjbrKHWnErbWApK0nYUD5EH1FUeeaYjrffdQ202kqW4tQSlIHmST2Aqh7B+lUrwWW+2XJLK1eMfusO6W94qDcuG8l1tfSopVpSTo6II+6o7eMDnEcecffgRj0zoyW/MqStxtWlwoh91bm/RS+6E/xz+SKJZOdSoqcHN8iP3ij5il8s8sx8GxFbsyyWuV9Fitx/e+sJqj0KcTr8YAn2aP4x/Krc1/8ACJCT4UIditjDCs7t4Vcly2wP7bkKSPaRur8zSUpR8FIB7dSt618G3GlsRMkc15o9Gh2m2LVFtBlKCUuSNaW8N+fQCUJ1v3ir1TUn7zzpby+qLjMAytHp+lStoQf4KB7x+/VZbziFC0X8sseHb6Gaw4XUvdVWcc6vojnjxXyReeI+XYGUxWnx9FcMe4QlgoL7BOnWlA+Su2xvyUkV1dx+/WrKMWt+RWOYiZbZ7CJMd9vuFoUNj7D8R6HYqInJ2IWCx4ze+Yso4wROXIfQ5Ldbip6ipZCfaFtatITvp6l681bO9k1iXAPLWL5ryoxgWQMzMbtskdFlat89TLZf2T7FYSAElez09OtqGu5UKzQ4hWuPaoUHjvk1H8s729jTsG6Vast+SSb/AAifVKtlosUCys+zhLmEa1/bEt1//LUaudejBya9tYfr+DRLGfZFKUqxUUpSgFKUoBVly+2Sr1x7frPCCDJm26RGZC1dKetbSkp2fQbI71eqoohKCpRAAGyT21QNZOa9r8GHiFs1xjXK1SLHAnRiFMyot4U240rWtpUlGwfPuKyk+Hzxkjt+6JKP2ZXI/ZU9frG3/wCzov8AKp/bXybnbd//ABCJ/LJ/bUdNHvRmVhBcskDP8z54yP8A6hy//wDWSP2VKHw7YhyThXFEq08pXdy6XldydfbfcuC5xDJQ2Ep61dx3Sv3fn862j9Z23/bCJ/LJ/bVfrK3HyuEX+WT+2odWL7UdKdqqbysnpPcaqBPO/hJ5ZyvnjIsrxJq03K2Xh8y0KdmpjrYKkhJbUlQ76I8wSCCPLyqeTUiO/v2D7TvT59CwrX6q1nmXIWVQeVm8Fw+1Y8/KRak3WRIvlwXFQEKdLSUo6EK2dpJ71aMu1FLpQ0rpO82DYoj0DF7bBkhIeYitMrCTsdSUAHR+0VcPUVYMQmZPOxsScsi2WPOU6sJTZ5S5LBbGuk9a0pPV57GvSrZdc0k2/m3HcGbgsuMXW3TJrkkrIW0WSgAAeRB66HTpIxim+3H1IO3Twfc0RubXbrAt1pn2kXoTUTU3BtvqaMgO79mr3gQOxHxHbddFPU/bVkzG+qxjjy+5Ihpt1Vst78xLbqilKi22VAEjuB2rVsTxAx7j4dbznkO0tNX+yoZTPsklxSfYuOKQEHeuotrSsLSrXcdvQ1LZn10bZtN42b9DdvrXO/lnwg8y3bmnJ73jVttt1tdzuD89iR9PaYVp1ZX7NSFkEKT1a33B1vddDkKKmkrUACUgkfDtWmJHLuY3jkXJMewewYtMVj8wQXLfdryYk+csJCiplHQUpR72kqUe+vSieCbpU2kqmfDBsbIcekX/AIlumKh5EaRcLQ7bw6odSWlrZLezrzAJqEfCPha5nwbxG4vkuQWGA1Z7ZNU4/KZuTLm0ezWkKSgHqIJI7a338qn40p1cdCnmg04UgrbCuoJOu4366PrWobxyZnTnLeS4ljFrw/6LYhF9pIvd0cirdLzXtPdSlCgddwfupnAuVTTjOec9mPX+jbzrLUiMth9pDrS0lC21gKSoEaIIPYgj0qHHLfgZhXe6SL5xRd41oU6StdjuAV9GB+DLiQS2P0VBQHoQO1S2xuTepeKw5WQsW1m5OIKnkW19T8ce8ekoWoAqBT0nevMmsJzPOcxhcp27A8IsVlnz5Nrdurrl1mOMIS2h0N6HQhRJ2oUTwTcdG4J1F+dyElt4k8ZXHDf1fjDOTR4YPutWi8NOx/tCC5of3or6ncL+MXkwpg5Z9fOQ1HuL3eW246ftbSs7/vTU5ON8/uWXXDJMfyKyRrXfscltxJyIcr6THc9o37RCm1kA+XmkjYNejkjOZXH8axXhdvjvWSRdGoF1krWUqhNunpQ8NdikL6Qrf5wqdRw6Gl0evU9JrXw/cIZVwLgt8cuGTSMllSmi+jHrcEtxUvJHb2anNH2i9BJUehOtbB0DUYL94cfElytzY5kedYz9WJu81P0ucqdHcbgMb0AhCXCopbQNJSB3IG/Mmp0XHOpQ51tHHVnt7EpSre7dbvKWsj6GwD0NBIHYrWvfY67JJrNXHWWEdbziG0711LUEj/DUasbnfoKdVaFyRHl7hDJbpOg2iI1Dx7GLOwmBbY7joeWlhH5ZQjsXFnalEkbJraeHcW4vh6UPsMKn3BPf6ZLAUoH9BPkj7u/zrLfrG3gd58Uf88n9tU+tLYP9cYn8sn9teZTsLaFR1nvJ75e/+HrSuq0oKmtorsQudugXizS7TdIjUuFLaUxIjvDaXW1DSkkfAgkVzcznwfcxY7yfPYwDH5V3sbL4fttzamstOpRvqSD1LSoOIPbeu5SCPOukf1pbT/rjE/lk/tp9ZW4/6vi/yyf216CqxXaedWtVVxqXIxLiK657dOKrceTMees2TRx9GlpW424mSUgAPpLalAdY0SO2ldXbWqzqvxYkR3+r2D7TuvPoWFa/VX7VKae6OiWlYYpSlSSKUpQClKUAr5cbQ6ypp1CVoUClSVDYIPmCK+qelAWc4vjJGjjlpI/5I3+yvyOI4oT3xizH7YTf9Wr1Q1x6vS+BeiOnSz+Jll/BDEt7/Bey/wDQm/6tfQxPFh5YzZx9kNv9lXelOrUfgXoh0s/ifqeSFarZbev6utsSH166/o7KW+rXlvQ7+ZrVeQ8M27M/EnKy7Mces95x0Y6xb4zMz99UiSmQtalezI0B0KA6t/LVbfp6V1jFRWIrCONSKqe/uW6w2Gy4xj8axY9bI1stsYEMxIqOhtsFRUdD02ST99Ydd8Pvs7xLYzmzP0X6mttknQX+p3TvtnnGyjpTrunSDs77VsKlSHBNJdxjHJFiuOT8O5Vjdo9j9PuVpkw43t19CPaONKSnqOjobPnqtLcpeHq+5RxjYV4nNi27Kotph2e6s+2Lca6Rm/ZktuKCTtTa2wpCtb0CPUakhShzqUIVM6gkaSB27DVR15Y4w5Az66XiA9x3xxczLKkWnKlS3oc61oI0hTiQ2pTi0eY6VgHt2A7VIqlC1SmprDLfYYEq1YrbLXNnuXCTEiNR3pjn40haEBKnD81EE/fUfst4kyyZzzmOWHivBc2tl4MT6Gb9cSy5GDTAQsBPsV66leff8kVJGlBOlGaSfYWPC2LjDwK1w7tYrbYpTDAZNstj5fjxkJJShDaylOx0hP5I15ela4zrhlnkHxDW7JMhje2xyLjrsHcee7GkIlmQFpI9mQSnoKvM63rsa3HSgnSjOOmW6NXcHcf3njHFLriNzh2xcdm4OPQ7xFV+/wBzaX3DkpOth5PZJOyCANarNM2xW3Zzx3ecQuqQYl0iORVnWygqHurHzSrpUPmBV9pQmNOKjoXI1LwVx5l+H2W7Xvke4RLjl93dabkyIquttEaO0GWG0kgegUs/NZracuFCuEf2E+GxKa6grofbC07+Oj6+dfvTVRJKSwyacVTSUS0nFcYV543aD9sNv9lfBxDEz54vZT9sJv8Aq1eqrXLq9L4F6I7dLP4n6lk/A/E9/wCdayj/APia/q19jE8WT+LjVnH2Q2/2VeKap1al8C9EOln8T9TywbXbLaF/V1uiQ+vXX9HaS31a8t6HfzNeylK6RiorEVhFG23lilKVYgUpSgFKUoBSlKAoRuqV9UOqA+NVSvsp+FUI7UB8Ur60KaoClKrqmqApTzqtKApqmq+qUBTRqmqqKrQFNU9arSgFKUoClVoBumqAUquqrQHyAa+qUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAU1SlAU0DQCq0oBSlKAUpSgFKUoCmhTVVpQFNVWlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgBpSlAKUpQClKUA9KUpQClKUApSlAKUpQClKUApSlAKpulKArSlKAUpSgFKUoB8aUpQClKUApSlAf/9k=";
 const durations = [8, 10, 12, 15, 20, 25]; // years
@@ -610,8 +754,19 @@ function calculate() {
     document.getElementById('resultHeadline').innerHTML =
         `<b>SIP + SWP Freedom Plan</b> — ${typeLabel}<br>मासिक SIP रक्कम : ${formatPlain(sipAmount)} | ${returnRate}% अपेक्षित परतावा (SIP)`;
 
-    const thead = document.getElementById('resultTableHead');
-    thead.innerHTML = `
+    // ---- Mirror into hidden PDF template (hybrid PDF: real Marathi text via html2canvas) ----
+    document.getElementById('pdfLogoImg1').src = LOGO_DATA_URL;
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    document.getElementById('pdfMetaName').textContent = clientName ? `ग्राहकाचे नाव: ${clientName}` : 'ग्राहकासाठी वैयक्तिक अहवाल';
+    document.getElementById('pdfMetaDate').textContent = `दिनांक: ${dd}/${mm}/${yyyy}`;
+    document.getElementById('pdfReportTitle').textContent = 'SIP + SWP Freedom Plan - सविस्तर अहवाल';
+    document.getElementById('pdfReportLine1').textContent = `${typeLabel} — मासिक SIP रक्कम : ${formatPlain(sipAmount)}`;
+    document.getElementById('pdfReportLine2').textContent = `अपेक्षित परतावा (SIP कालावधीत): ${returnRate}%   |   SWP (Default): ICICI Freedom SIP 1x–8x सारणी`;
+
+    const theadHTML = `
         <tr>
             <th>SIP कालावधी</th>
             <th>एकूण गुंतवणूक</th>
@@ -621,9 +776,10 @@ function calculate() {
             <th class="nominee-th">वारस रक्कम (${nomineeYears} वर्षांनी)</th>
             ${customEnabled ? '<th class="custom-th">इच्छित उत्पन्न (Custom)</th><th class="custom-th">Custom पट</th>' : ''}
         </tr>`;
+    document.getElementById('resultTableHead').innerHTML = theadHTML;
+    document.getElementById('pdfTableHead').innerHTML = theadHTML;
 
-    const tbody = document.getElementById('resultTableBody');
-    tbody.innerHTML = rows.map(row => `
+    const tbodyHTML = rows.map(row => `
         <tr>
             <td>${row.years} वर्षे</td>
             <td>${formatINR(row.invested)}</td>
@@ -634,6 +790,8 @@ function calculate() {
             ${customEnabled ? `<td class="custom-val">${formatPlain(row.customSWP)}</td><td class="custom-multiple">${row.customMultiple.toFixed(1)}x</td>` : ''}
         </tr>
     `).join('');
+    document.getElementById('resultTableBody').innerHTML = tbodyHTML;
+    document.getElementById('pdfTableBody').innerHTML = tbodyHTML;
 
     let note = 'SWP = Systematic Withdrawal Plan | मासिक उत्पन्न SWP (Default) ही ICICI Prudential Freedom SIP योजनेच्या प्रमाणित 1x–8x पट सारणीनुसार आहे (SIP रक्कम व Step-Up नुसार प्रमाणशीर वाढते).';
     note += customEnabled
@@ -641,9 +799,11 @@ function calculate() {
         : ' ग्राहकाला यापेक्षा जास्त मासिक उत्पन्न हवे असल्यास, वर "जास्त मासिक उत्पन्न हवे आहे का?" हा पर्याय निवडून Custom उत्पन्न पाहता येईल.';
     note += ' हे कॅल्क्युलेशन फक्त अंदाजासाठी आहे, गुंतवणूक सल्ला नाही.';
     document.getElementById('resultNote').textContent = note;
+    document.getElementById('pdfNote1').textContent = note;
 
-    document.getElementById('nomineeNote').textContent =
-        `वारस रक्कम (Nominee) — SWP सुरू झाल्यावर दरमहा "Default" रक्कम काढत राहूनही, ${nomineeYears} वर्षांनंतर अंदाजे किती रक्कम कॉर्पसमध्ये शिल्लक राहील याचा अंदाज (अपेक्षित परतावा ${nomineeRate}% गृहीत धरून). ही रक्कम तुमच्या वारसांना (नॉमिनी) मिळू शकते.`;
+    const nomineeNoteText = `वारस रक्कम (Nominee) — SWP सुरू झाल्यावर दरमहा "Default" रक्कम काढत राहूनही, ${nomineeYears} वर्षांनंतर अंदाजे किती रक्कम कॉर्पसमध्ये शिल्लक राहील याचा अंदाज (अपेक्षित परतावा ${nomineeRate}% गृहीत धरून). ही रक्कम तुमच्या वारसांना (नॉमिनी) मिळू शकते.`;
+    document.getElementById('nomineeNote').textContent = nomineeNoteText;
+    document.getElementById('pdfNote2').textContent = nomineeNoteText;
 
     // "1 वर्ष उशीर केल्यास काय फरक पडतो?" — cost-of-delay insight based on the longest goal (last row)
     const goalRow = rows[rows.length - 1];
@@ -653,426 +813,127 @@ function calculate() {
     const delayedIncome = goalRow.corpus > 0 ? goalRow.monthlySWP * (delayedCorpus / goalRow.corpus) : 0;
     const incomeLoss = Math.max(goalRow.monthlySWP - delayedIncome, 0);
 
-    document.getElementById('delayBox').innerHTML = `
+    const delayBoxHTML = `
         ⏳ <span class="headline">१ वर्ष उशीर केल्यास काय फरक पडतो?</span>
         आजच SIP सुरू केल्यास हे ध्येय <span class="num">${formatINR(goalRow.corpus)}</span> मध्ये साध्य करता येईल.<br>
         पण १ वर्ष उशीर केल्यास तुमचा <span class="num">${formatINR(corpusLoss)}</span> एवढा कॉर्पस कमी होईल — त्यामुळे उशीरामुळे तुम्हाला तब्बल <span class="num">${formatPlain(incomeLoss)}</span>/महिना एवढी कमी निवृत्ती उत्पन्न मिळेल.<br>
         <span class="cta-line">योग्य वेळी योग्य पाऊल उचलण्यासाठी — आजच <a href="https://wa.me/918087126804" target="_blank">WhatsApp</a> किंवा <a href="tel:8087126804">कॉल</a> करून मार्गदर्शन घ्या. 📞 8087126804</span>
     `;
+    document.getElementById('delayBox').innerHTML = delayBoxHTML;
     document.getElementById('delayBox').style.display = 'block';
+    document.getElementById('pdfDelayBox').innerHTML = delayBoxHTML;
 
     document.getElementById('resultBox').style.display = 'block';
     document.getElementById('pdfBtnRow').classList.add('show');
     document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function buildPDF() {
+async function buildPDF() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+    const template = document.getElementById('pdfTemplate');
 
-    const primary = [30, 58, 138];
-    const accent = [21, 128, 61];
-    const orange = [234, 88, 12];
-    const purple = [124, 58, 237];
-    const teal = [8, 145, 178];
-    const gold = [245, 158, 11];
-    const dark = [30, 41, 59];
-    const gray = [100, 116, 139];
+    // Capture WhatsApp/Call link zones (position within the template) BEFORE rasterizing,
+    // so we can overlay real clickable regions on top of the rendered image afterwards.
+    const templateRect = template.getBoundingClientRect();
+    const links = Array.from(template.querySelectorAll('a[href]')).map(el => {
+        const r = el.getBoundingClientRect();
+        return {
+            url: el.getAttribute('href'),
+            x: r.left - templateRect.left,
+            y: r.top - templateRect.top,
+            w: r.width,
+            h: r.height
+        };
+    });
 
-    const MARGIN = 14;
-    const CONTENT_W = 182;
-    const PAGE_BOTTOM = 280;
+    const TEMPLATE_WIDTH_PX = template.offsetWidth;
+    const canvas = await html2canvas(template, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
 
-    function addContinuationHeader() {
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(9.5);
-        doc.setTextColor(...primary);
-        doc.text('ETHICA Finserv | SIP + SWP Freedom Plan', 105, 12, { align: 'center' });
-        doc.setDrawColor(226, 232, 240);
-        doc.line(MARGIN, 15, MARGIN + CONTENT_W, 15);
-        doc.setFont('helvetica', 'normal');
-        return 24;
+    const PDF_WIDTH_MM = 210;
+    const PDF_HEIGHT_MM = 297;
+    const mmPerPx = PDF_WIDTH_MM / TEMPLATE_WIDTH_PX;
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+    const imgWidthMM = PDF_WIDTH_MM;
+    const imgHeightMM = (canvas.height / canvas.width) * imgWidthMM;
+
+    const doc = new jsPDF('p', 'mm', 'a4');
+    const totalPages = Math.max(1, Math.ceil(imgHeightMM / PDF_HEIGHT_MM));
+
+    for (let i = 0; i < totalPages; i++) {
+        if (i > 0) doc.addPage();
+        const yOffsetMM = -(i * PDF_HEIGHT_MM);
+        doc.addImage(imgData, 'JPEG', 0, yOffsetMM, imgWidthMM, imgHeightMM);
     }
 
-    function ensureSpace(y, needed) {
-        if (y + needed > PAGE_BOTTOM) {
-            doc.addPage();
-            return addContinuationHeader();
+    // Overlay real clickable link zones (WhatsApp banner, WhatsApp/Call lines) on the right page
+    links.forEach(link => {
+        const xmm = link.x * mmPerPx;
+        const wmm = link.w * mmPerPx;
+        const hmm = link.h * mmPerPx;
+        const absoluteYmm = link.y * mmPerPx;
+        const pageIndex = Math.floor(absoluteYmm / PDF_HEIGHT_MM);
+        const pageRelativeYmm = absoluteYmm - pageIndex * PDF_HEIGHT_MM;
+        if (pageIndex >= 0 && pageIndex < totalPages) {
+            doc.setPage(pageIndex + 1);
+            doc.link(xmm, pageRelativeYmm, wmm, hmm, { url: link.url });
         }
-        return y;
-    }
-
-    function wrapText(text, x, y, width, lineHeight) {
-        const lines = doc.splitTextToSize(text, width);
-        lines.forEach(line => {
-            y = ensureSpace(y, lineHeight);
-            doc.text(line, x, y);
-            y += lineHeight;
-        });
-        return y;
-    }
-
-    // ===== Top: brand name (no filled banner, matches the screen — advisor card is the true header) =====
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(18);
-    doc.setTextColor(...primary);
-    doc.text('ETHICA Finserv', 105, 16, { align: 'center' });
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.setTextColor(...gray);
-    doc.text('SIP + SWP Freedom Plan - Personalized Report', 105, 22, { align: 'center' });
-    doc.setDrawColor(226, 232, 240);
-    doc.line(MARGIN, 26, MARGIN + CONTENT_W, 26);
-
-    let y = 34;
-
-    // ===== Prepared for / Date =====
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const yyyy = today.getFullYear();
-    const dateStr = `${dd}/${mm}/${yyyy}`;
-
-    doc.setFontSize(10);
-    doc.setTextColor(...dark);
-    if (lastResults.clientName) {
-        doc.setFont('helvetica', 'bold');
-        doc.text(`Prepared for: ${lastResults.clientName}`, MARGIN, y);
-        doc.setFont('helvetica', 'normal');
-    } else {
-        doc.text('Personalized Report', MARGIN, y);
-    }
-    doc.text(`Date: ${dateStr}`, MARGIN + CONTENT_W, y, { align: 'right' });
-    y += 8;
-
-    // ===== Advisor card (this IS the header, matching the on-screen advisor card) =====
-    const cardH = 40;
-    y = ensureSpace(y, cardH + 4);
-    doc.setDrawColor(226, 232, 240);
-    doc.setLineWidth(0.3);
-    doc.roundedRect(MARGIN, y, CONTENT_W, cardH, 2, 2);
-    try { doc.addImage(LOGO_DATA_URL, 'JPEG', MARGIN + 4, y + 5, 14, 14); } catch (e) {}
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(...primary);
-    doc.text('Valmik Dagu Ugale | ARN-142382', MARGIN + 22, y + 9);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(...gray);
-    doc.text('AMFI-registered mutual fund distributor & SIF distributor', MARGIN + 22, y + 14);
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(8.5);
-    doc.setTextColor(...primary);
-    doc.text('Your trusted partner for your financial future', MARGIN + 22, y + 19);
-    doc.setFont('helvetica', 'normal');
-
-    doc.setFontSize(8.5);
-    doc.setTextColor(51, 65, 85);
-    doc.text('Tel: 8087126804', MARGIN + 22, y + 26);
-    doc.text('Email: valmikugale@gmail.com', MARGIN + 22, y + 31);
-    doc.text('Nashik, Maharashtra - 422003', MARGIN + 22, y + 36);
-
-    doc.setDrawColor(...gold);
-    doc.setLineWidth(0.6);
-    doc.line(MARGIN + 3, y + cardH - 8, MARGIN + CONTENT_W - 3, y + cardH - 8);
-
-    doc.setFillColor(220, 252, 231);
-    doc.roundedRect(MARGIN + 3, y + cardH - 6.5, CONTENT_W - 6, 5.5, 1, 1, 'F');
-    doc.setTextColor(...accent);
-    doc.setFontSize(7.5);
-    doc.text('9+ Years Experience | AMFI-Registered | SEBI Regulated', 105, y + cardH - 2.8, { align: 'center' });
-
-    y += cardH + 6;
-
-    // ===== Green hook banner =====
-    y = ensureSpace(y, 14);
-    doc.setFillColor(21, 128, 61);
-    doc.roundedRect(MARGIN, y, CONTENT_W, 12, 2, 2, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(8);
-    const hookLines = doc.splitTextToSize(
-        'Wealth Creation | Child\'s Education & Marriage | Post-Retirement Income - Call/WhatsApp for free guidance: 8087126804',
-        CONTENT_W - 8
-    );
-    let hy = y + 5;
-    hookLines.forEach(line => { doc.text(line, 105, hy, { align: 'center' }); hy += 4; });
-    y += 16;
-
-    // ===== SIP + SWP explainer steps =====
-    y = ensureSpace(y, 10);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(...primary);
-    doc.text('How does SIP + SWP work? (Simple Explanation)', MARGIN, y);
-    doc.setFont('helvetica', 'normal');
-    y += 6;
-
-    const steps = [
-        ['STEP 1 - Start the SIP', 'Begin investing a fixed amount every month in an equity mutual fund - even a small amount works.'],
-        ['STEP 2 - Corpus grows', 'Over the years, compounding grows the invested amount many times over.'],
-        ['STEP 3 - Switch happens', 'After the chosen period, the accumulated fund is moved into a safer scheme.'],
-        ['STEP 4 - Monthly Income (SWP)', 'Through SWP, a fixed amount is credited to your account every month.']
-    ];
-    steps.forEach(([title, desc]) => {
-        y = ensureSpace(y, 12);
-        doc.setFillColor(248, 250, 252);
-        doc.setDrawColor(226, 232, 240);
-        const boxH = 10.5;
-        doc.roundedRect(MARGIN, y - 4, CONTENT_W, boxH, 1.5, 1.5, 'FD');
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(8.5);
-        doc.setTextColor(...accent);
-        doc.text(title, MARGIN + 3, y);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(7.8);
-        doc.setTextColor(...gray);
-        doc.text(desc, MARGIN + 3, y + 4.2);
-        y += boxH + 2.5;
     });
 
-    y += 2;
-
-    // ===== Report title =====
-    y = ensureSpace(y, 16);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12.5);
-    doc.setTextColor(...dark);
-    doc.text('SIP + SWP Freedom Plan - Detailed Report', 105, y, { align: 'center' });
-    doc.setFont('helvetica', 'normal');
-    y += 7;
-
-    const typeLabel = lastResults.sipType === 'percent'
-        ? `Step-Up SIP (+${lastResults.percentValue}% every year)`
-        : lastResults.sipType === 'fixed'
-        ? `Step-Up SIP (+Rs.${Math.round(lastResults.fixedValue).toLocaleString('en-IN')} every year)`
-        : 'Normal SIP';
-
-    doc.setFontSize(9.5);
-    doc.text(`Monthly SIP: Rs.${Math.round(lastResults.sipAmount).toLocaleString('en-IN')}   |   Type: ${typeLabel}`, 105, y, { align: 'center' });
-    y += 5;
-    doc.text(`Expected Return (SIP phase): ${lastResults.returnRate}%   |   SWP (Default): ICICI Freedom SIP 1x-8x scheme table`, 105, y, { align: 'center' });
-    y += 9;
-
-    // ===== Table =====
-    const custom = lastResults.customEnabled;
-    const cols = custom
-        ? [
-            { label: 'Duration', w: 18 },
-            { label: 'Invested', w: 26 },
-            { label: 'Market Value', w: 28, color: orange },
-            { label: 'SWP Default', w: 24 },
-            { label: 'Multiple', w: 16, color: accent },
-            { label: 'Nominee Amt', w: 28, color: teal },
-            { label: 'Custom SWP', w: 24, color: purple },
-            { label: 'C.Mult', w: 18, color: purple }
-        ]
-        : [
-            { label: 'SIP Duration', w: 24 },
-            { label: 'Total Invested', w: 32 },
-            { label: 'Est. Market Value', w: 34, color: orange },
-            { label: 'SWP (Default)', w: 30 },
-            { label: 'Multiple', w: 20, color: accent },
-            { label: `Nominee Amount (${lastResults.nomineeYears} yrs)`, w: 42, color: teal }
-        ];
-
-    const tableW = cols.reduce((s, c) => s + c.w, 0);
-    const tableX = MARGIN + (CONTENT_W - tableW) / 2;
-
-    y = ensureSpace(y, 12);
-    let cx = tableX;
-    doc.setFillColor(...orange);
-    doc.rect(tableX, y - 5.5, tableW, 8, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(custom ? 6.8 : 7.8);
-    cols.forEach(col => {
-        const lines = doc.splitTextToSize(col.label, col.w - 2);
-        doc.text(lines, cx + 1.5, y - 2.3);
-        cx += col.w;
-    });
-    doc.setFont('helvetica', 'normal');
-    y += 4;
-
-    lastResults.rows.forEach((row, idx) => {
-        const rowH = 8;
-        y = ensureSpace(y, rowH + 1);
-        if (idx % 2 === 0) {
-            doc.setFillColor(253, 242, 236);
-            doc.rect(tableX, y - 5, tableW, rowH, 'F');
-        }
-        doc.setFontSize(custom ? 6.8 : 7.8);
-        cx = tableX;
-        const values = custom
-            ? [
-                `${row.years} yrs`,
-                `Rs.${Math.round(row.invested).toLocaleString('en-IN')}`,
-                `Rs.${Math.round(row.corpus).toLocaleString('en-IN')}`,
-                `Rs.${Math.round(row.monthlySWP).toLocaleString('en-IN')}`,
-                `${row.multiple.toFixed(1)}x`,
-                row.nomineeCorpus > 0 ? `Rs.${Math.round(row.nomineeCorpus).toLocaleString('en-IN')}` : 'Depleted',
-                `Rs.${Math.round(row.customSWP).toLocaleString('en-IN')}`,
-                `${row.customMultiple.toFixed(1)}x`
-            ]
-            : [
-                `${row.years} yrs`,
-                `Rs.${Math.round(row.invested).toLocaleString('en-IN')}`,
-                `Rs.${Math.round(row.corpus).toLocaleString('en-IN')}`,
-                `Rs.${Math.round(row.monthlySWP).toLocaleString('en-IN')}`,
-                `${row.multiple.toFixed(1)}x`,
-                row.nomineeCorpus > 0 ? `Rs.${Math.round(row.nomineeCorpus).toLocaleString('en-IN')}` : 'Depleted'
-            ];
-        values.forEach((val, i) => {
-            doc.setTextColor(...(cols[i].color || dark));
-            doc.text(val, cx + 1.5, y);
-            cx += cols[i].w;
-        });
-        y += rowH;
-    });
-    doc.setTextColor(...dark);
-    y += 5;
-
-    // ===== Notes =====
-    doc.setFontSize(7.8);
-    doc.setTextColor(...gray);
-    let note = 'SWP = Systematic Withdrawal Plan | The monthly SWP (Default) figure follows ICICI Prudential Freedom SIP\'s standard 1x-8x multiple table (scales proportionally with the SIP amount and any step-up chosen).';
-    note += custom
-        ? ` A "Custom SWP" figure at the client's chosen ${lastResults.customRate}% withdrawal rate is also shown - a higher withdrawal rate can deplete the corpus faster.`
-        : ' If the client wants a higher monthly income, the Custom Withdrawal option can be used.';
-    y = wrapText(note, MARGIN, y, CONTENT_W, 3.8);
-    y += 3;
-
-    const nomineeNote = `Nominee Amount - an estimate of how much corpus would remain after ${lastResults.nomineeYears} years of monthly "Default" SWP withdrawals, assuming a ${lastResults.nomineeRate}% return during that period. This amount could pass on to your nominee(s).`;
-    y = wrapText(nomineeNote, MARGIN, y, CONTENT_W, 3.8);
-    y += 6;
-
-    // ===== Delay box ("1 year delay") =====
-    const goalRow = lastResults.rows[lastResults.rows.length - 1];
-    const delayedMonths = Math.max(goalRow.years * 12 - 12, 12);
-    const { corpus: delayedCorpus } = simulateSIP(lastResults.sipAmount, delayedMonths, lastResults.returnRate,
-        lastResults.sipType === 'percent' ? 'percent' : (lastResults.sipType === 'fixed' ? 'fixed' : 'none'),
-        lastResults.sipType === 'percent' ? lastResults.percentValue : lastResults.fixedValue);
-    const corpusLoss = Math.max(goalRow.corpus - delayedCorpus, 0);
-    const delayedIncome = goalRow.corpus > 0 ? goalRow.monthlySWP * (delayedCorpus / goalRow.corpus) : 0;
-    const incomeLoss = Math.max(goalRow.monthlySWP - delayedIncome, 0);
-
-    const delayText = `Starting the SIP today would achieve this goal of Rs.${Math.round(goalRow.corpus).toLocaleString('en-IN')}. But delaying by just 1 year would reduce your corpus by Rs.${Math.round(corpusLoss).toLocaleString('en-IN')} - meaning about Rs.${Math.round(incomeLoss).toLocaleString('en-IN')}/month less retirement income due to the delay.`;
-    const delayLines = doc.splitTextToSize(delayText, CONTENT_W - 10);
-    const delayBoxH = 12 + delayLines.length * 4;
-    y = ensureSpace(y, delayBoxH + 4);
-    doc.setFillColor(255, 251, 235);
-    doc.setDrawColor(245, 158, 11);
-    doc.setLineWidth(1.2);
-    doc.line(MARGIN, y - 5, MARGIN, y - 5 + delayBoxH);
-    doc.setLineWidth(0.2);
-    doc.rect(MARGIN, y - 5, CONTENT_W, delayBoxH);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setTextColor(146, 64, 14);
-    doc.text('What difference does a 1-year delay make?', MARGIN + 4, y);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7.8);
-    doc.setTextColor(120, 53, 15);
-    let dy = y + 5;
-    delayLines.forEach(line => { doc.text(line, MARGIN + 4, dy); dy += 4; });
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(...accent);
-    doc.text('Take the right step at the right time - Call or WhatsApp today: 8087126804', MARGIN + 4, dy);
-    doc.setFont('helvetica', 'normal');
-    y += delayBoxH + 6;
-
-    // ===== CTA box =====
-    const ctaText = 'The figures above are estimates only. Personalized advice is needed to decide exactly which scheme, how much to invest, and which SWP option suits you best. To understand this in detail and get all your questions answered, reach out today - for free.';
-    const ctaLines = doc.splitTextToSize(ctaText, CONTENT_W - 10);
-    const ctaBoxH = 10 + ctaLines.length * 4 + 6;
-    y = ensureSpace(y, ctaBoxH + 4);
-    doc.setFillColor(236, 253, 243);
-    doc.setDrawColor(134, 239, 172);
-    doc.setLineWidth(0.4);
-    doc.roundedRect(MARGIN, y - 5, CONTENT_W, ctaBoxH, 2, 2, 'FD');
-    doc.setFontSize(7.8);
-    doc.setTextColor(20, 83, 45);
-    let cy = y;
-    ctaLines.forEach(line => { doc.text(line, 105, cy, { align: 'center' }); cy += 4; });
-    cy += 2;
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8.5);
-    doc.setTextColor(21, 128, 61);
-    doc.textWithLink('WhatsApp Message: 8087126804', 105, cy, { align: 'center', url: 'https://wa.me/918087126804' });
-    doc.setFont('helvetica', 'normal');
-    y += ctaBoxH + 6;
-
-    // ===== Disclaimer =====
-    y = ensureSpace(y, 14);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setTextColor(51, 65, 85);
-    doc.text('Disclaimer:', MARGIN, y);
-    doc.setFont('helvetica', 'normal');
-    y += 5;
-    const disclaimerPoints = [
-        'SWP = Systematic Withdrawal Plan. The monthly income figures above are illustrative only.',
-        'Past performance may or may not be sustained in future and is not a guarantee of any future returns.',
-        'Mutual Funds do not have a fixed rate of return and it is not possible to predict the rate of return.',
-        'Mutual Fund Investments are subject to market risks, read all scheme related documents carefully.',
-        'This report is generated based on the assumptions entered by the client.'
-    ];
-    doc.setFontSize(7.3);
-    doc.setTextColor(...gray);
-    disclaimerPoints.forEach((pt, i) => {
-        y = wrapText(`${i + 1}. ${pt}`, MARGIN, y, CONTENT_W, 3.6);
-    });
-    y += 3;
-
-    y = ensureSpace(y, 12);
-    doc.setDrawColor(226, 232, 240);
-    doc.line(MARGIN, y, MARGIN + CONTENT_W, y);
-    y += 5;
-    doc.setFontSize(7.8);
-    doc.setTextColor(71, 85, 105);
-    y = wrapText('Valmik Dagu Ugale | ARN-142382 | EUIN-E243525 | AMFI-registered mutual fund distributor & SIF distributor', MARGIN, y, CONTENT_W, 3.8);
-    doc.text('Tel: 8087126804  |  Email: valmikugale@gmail.com  |  Nashik, Maharashtra', MARGIN, y);
-
-    // ===== Page numbers =====
-    const totalPages = doc.internal.getNumberOfPages();
-    for (let i = 1; i <= totalPages; i++) {
+    const totalPagesFinal = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= totalPagesFinal; i++) {
         doc.setPage(i);
         doc.setFontSize(7);
         doc.setTextColor(148, 163, 184);
-        doc.text(`Page ${i} of ${totalPages} - ETHICA Finserv`, 105, 292, { align: 'center' });
+        doc.text(`Page ${i} of ${totalPagesFinal} — ETHICA Finserv`, 105, 292, { align: 'center' });
     }
 
     return doc;
 }
 
-function downloadPDF() {
+async function downloadPDF() {
     if (!lastResults) return;
-    const doc = buildPDF();
-    doc.save('ETHICA-SIP-SWP-Freedom-Plan.pdf');
+    const btn = document.querySelector('.btn-pdf');
+    const originalText = btn ? btn.textContent : null;
+    if (btn) { btn.textContent = '⏳ PDF तयार होत आहे...'; btn.disabled = true; }
+    try {
+        const doc = await buildPDF();
+        doc.save('ETHICA-SIP-SWP-Freedom-Plan.pdf');
+    } finally {
+        if (btn) { btn.textContent = originalText; btn.disabled = false; }
+    }
 }
 
 async function sharePDFOnWhatsApp() {
     if (!lastResults) return;
-    const doc = buildPDF();
-    const fileName = 'ETHICA-SIP-SWP-Freedom-Plan.pdf';
-    const shareText = 'माझा SIP + SWP Freedom Plan — ETHICA Finserv';
+    const btn = document.querySelector('.btn-whatsapp');
+    const originalText = btn ? btn.textContent : null;
+    if (btn) { btn.textContent = '⏳ PDF तयार होत आहे...'; btn.disabled = true; }
 
     try {
-        const blob = doc.output('blob');
-        const file = new File([blob], fileName, { type: 'application/pdf' });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({ files: [file], title: fileName, text: shareText });
-            return;
-        }
-    } catch (e) {
-        // fall through to fallback below
-    }
+        const doc = await buildPDF();
+        const fileName = 'ETHICA-SIP-SWP-Freedom-Plan.pdf';
+        const shareText = 'माझा SIP + SWP Freedom Plan — ETHICA Finserv';
 
-    // Fallback for devices/browsers without file-sharing support: download the PDF
-    // and open WhatsApp with a message asking the user to attach it manually.
-    doc.save(fileName);
-    const waText = encodeURIComponent(shareText + ' — PDF डाउनलोड झाली आहे, कृपया ती इथे जोडून (attach करून) पाठवा.');
-    window.open('https://wa.me/?text=' + waText, '_blank');
+        try {
+            const blob = doc.output('blob');
+            const file = new File([blob], fileName, { type: 'application/pdf' });
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({ files: [file], title: fileName, text: shareText });
+                return;
+            }
+        } catch (e) {
+            // fall through to fallback below
+        }
+
+        // Fallback for devices/browsers without file-sharing support: download the PDF
+        // and open WhatsApp with a message asking the user to attach it manually.
+        doc.save(fileName);
+        const waText = encodeURIComponent(shareText + ' — PDF डाउनलोड झाली आहे, कृपया ती इथे जोडून (attach करून) पाठवा.');
+        window.open('https://wa.me/?text=' + waText, '_blank');
+    } finally {
+        if (btn) { btn.textContent = originalText; btn.disabled = false; }
+    }
 }
 </script>
 </body>
